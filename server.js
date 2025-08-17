@@ -2,6 +2,7 @@
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import { PRODUCT_CATALOG } from "./catalog.js"; // centralized catalog
 
 dotenv.config();
 
@@ -9,27 +10,23 @@ const app = express();
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-
-// ✅ Correct model & endpoint
 const GEMINI_MODEL = "gemini-1.5-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 // Proxy endpoint
 app.post("/recommend", async (req, res) => {
   try {
-    const { query, catalog = [], topK = 3 } = req.body;
+    const { query, topK = 3 } = req.body;   // 👈 only accept query + topK
 
-    // ✅ Strong JSON-only prompt
+    // ✅ Always use centralized PRODUCT_CATALOG
     const prompt = `
 You are a product recommendation AI. 
 Your ONLY job is to return JSON, nothing else.
 
 Catalog of products:
-${catalog
-  .map(
-    (p) => `- ${p.id}: ${p.name} (${p.category}) - ${p.description}`
-  )
-  .join("\n")}
+${PRODUCT_CATALOG.map(
+  (p) => `- ${p.id}: ${p.name} (${p.category}) - ${p.description}`
+).join("\n")}
 
 User query: "${query}"
 
@@ -41,7 +38,6 @@ Return exactly ${topK} matches in strict JSON format:
 Do not add extra text, only return valid JSON.
 `;
 
-    // Call Gemini
     const geminiRes = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,7 +59,7 @@ Do not add extra text, only return valid JSON.
 
     let recommendations = [];
     try {
-      // ✅ Clean out ```json ... ```
+      // clean possible ```json fences
       const cleaned = text.replace(/```json|```/g, "").trim();
       recommendations = JSON.parse(cleaned);
     } catch (err) {
