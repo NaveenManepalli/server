@@ -9,10 +9,11 @@ const app = express();
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
 
-// Proxy endpoint
+// ✅ use new models and endpoint
+const GEMINI_MODEL = "gemini-1.5-flash"; 
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
 app.post("/recommend", async (req, res) => {
   try {
     const { query, catalog = [], topK = 3 } = req.body;
@@ -68,7 +69,6 @@ Return the top ${topK} matching products in JSON:
   }
 });
 
-// ✅ Use Render's dynamic port
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`✅ Gemini proxy running at http://localhost:${PORT}/recommend`);
