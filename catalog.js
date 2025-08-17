@@ -1,4 +1,4 @@
-[
+export const PRODUCT_CATALOG =[
     {
       "brand": "CURAPOD by litemed",
       "product_name": "Adaptive Pain Management",
