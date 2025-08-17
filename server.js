@@ -2,12 +2,17 @@
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import cors from "cors"; // ✅ Import cors
 import { PRODUCT_CATALOG } from "./catalog.js"; // centralized catalog
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// ✅ Enable CORS for all origins (or restrict to your frontend)
+app.use(cors());
+// Or to restrict: app.use(cors({ origin: 'https://snack-web-player.s3.us-west-1.amazonaws.com' }));
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_MODEL = "gemini-1.5-flash";
