@@ -15,23 +15,37 @@ const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GE
 
 // ✅ Log on startup
 console.log("🔑 GEMINI_API_KEY present:", !!GEMINI_API_KEY);
-console.log("📦 Catalog loaded:", Array.isArray(PRODUCT_CATALOG) ? PRODUCT_CATALOG.length : "NOT AN ARRAY");
+console.log(
+  "📦 Catalog loaded:",
+  Array.isArray(PRODUCT_CATALOG) ? PRODUCT_CATALOG.length : "NOT AN ARRAY"
+);
 
 // Proxy endpoint
 app.post("/recommend", async (req, res) => {
   try {
-    const { query, topK = 3 } = req.body;   // 👈 only accept query + topK
+    const { query, topK = 3 } = req.body;
     console.log("📩 Incoming request:", { query, topK });
 
-    // ✅ Always use centralized PRODUCT_CATALOG
+    // ✅ Log first few catalog entries
+    console.log("🔎 First 3 products:", PRODUCT_CATALOG.slice(0, 3));
+
+    // ✅ Robust mapping for your catalog keys
+    const catalogText = PRODUCT_CATALOG.map((p, i) => {
+      const id = `item-${i}`; // no explicit id in your catalog
+      const name = p.product_name || "Unknown Product";
+      const brand = p.brand ? `${p.brand} ` : "";
+      const category = p.category || "Uncategorized";
+      const desc = p.description || "";
+      const price = p.price ? ` - $${p.price}` : "";
+      return `- ${id}: ${brand}${name} (${category}) - ${desc}${price}`;
+    }).join("\n");
+
     const prompt = `
 You are a product recommendation AI. 
 Your ONLY job is to return JSON, nothing else.
 
 Catalog of products:
-${PRODUCT_CATALOG.map(
-  (p) => `- ${p.id}: ${p.name} (${p.category}) - ${p.description}`
-).join("\n")}
+${catalogText}
 
 User query: "${query}"
 
@@ -43,7 +57,7 @@ Return exactly ${topK} matches in strict JSON format:
 Do not add extra text, only return valid JSON.
 `;
 
-    console.log("📝 Prompt sent to Gemini:\n", prompt.slice(0, 1000), "...\n"); // log only first 1000 chars
+    console.log("📝 Prompt sent to Gemini:\n", prompt.slice(0, 1000), "...\n");
 
     const geminiRes = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
       method: "POST",
@@ -68,7 +82,6 @@ Do not add extra text, only return valid JSON.
 
     let recommendations = [];
     try {
-      // clean possible ```json fences
       const cleaned = text.replace(/```json|```/g, "").trim();
       recommendations = JSON.parse(cleaned);
       console.log("✅ Parsed recommendations:", recommendations);
