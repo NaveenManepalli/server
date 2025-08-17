@@ -15,7 +15,7 @@ const GEMINI_URL =
 // Proxy endpoint
 app.post("/recommend", async (req, res) => {
   try {
-    const { query, catalog, topK = 3 } = req.body;
+    const { query, catalog = [], topK = 3 } = req.body;
 
     const prompt = `
 You are a product recommendation AI.
@@ -43,22 +43,33 @@ Return the top ${topK} matching products in JSON:
     });
 
     const data = await geminiRes.json();
+
+    if (!geminiRes.ok) {
+      console.error("❌ Gemini API error:", data);
+      return res
+        .status(500)
+        .json({ error: "Gemini API call failed", details: data });
+    }
+
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
     let recommendations = [];
     try {
       recommendations = JSON.parse(text);
-    } catch {
+    } catch (err) {
+      console.error("⚠️ Failed to parse Gemini response:", text);
       recommendations = [];
     }
 
     res.json({ recommendations });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error talking to Gemini");
+    console.error("❌ Server error:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-app.listen(3001, () => {
-  console.log("✅ Gemini proxy running at http://localhost:3001/recommend");
+// ✅ Use Render's dynamic port
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`✅ Gemini proxy running at http://localhost:${PORT}/recommend`);
 });
