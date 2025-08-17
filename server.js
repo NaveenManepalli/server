@@ -10,17 +10,21 @@ app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// ✅ use new models and endpoint
-const GEMINI_MODEL = "gemini-1.5-flash"; 
+// ✅ Correct model & endpoint
+const GEMINI_MODEL = "gemini-1.5-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
+// Proxy endpoint
 app.post("/recommend", async (req, res) => {
   try {
     const { query, catalog = [], topK = 3 } = req.body;
 
+    // ✅ Strong JSON-only prompt
     const prompt = `
-You are a product recommendation AI.
-The catalog of products is below:
+You are a product recommendation AI. 
+Your ONLY job is to return JSON, nothing else.
+
+Catalog of products:
 ${catalog
   .map(
     (p) => `- ${p.id}: ${p.name} (${p.category}) - ${p.description}`
@@ -29,12 +33,15 @@ ${catalog
 
 User query: "${query}"
 
-Return the top ${topK} matching products in JSON:
+Return exactly ${topK} matches in strict JSON format:
 [
-  { "id": "...", "name": "...", "reason": "...", "score": 0.0 }
+  { "id": "string", "name": "string", "reason": "string", "score": number }
 ]
+
+Do not add extra text, only return valid JSON.
 `;
 
+    // Call Gemini
     const geminiRes = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,7 +63,9 @@ Return the top ${topK} matching products in JSON:
 
     let recommendations = [];
     try {
-      recommendations = JSON.parse(text);
+      // ✅ Clean out ```json ... ```
+      const cleaned = text.replace(/```json|```/g, "").trim();
+      recommendations = JSON.parse(cleaned);
     } catch (err) {
       console.error("⚠️ Failed to parse Gemini response:", text);
       recommendations = [];
@@ -69,6 +78,7 @@ Return the top ${topK} matching products in JSON:
   }
 });
 
+// ✅ Use Render’s PORT
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`✅ Gemini proxy running at http://localhost:${PORT}/recommend`);
