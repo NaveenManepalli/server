@@ -2,18 +2,15 @@
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import rawCatalog from "./catalog.json" assert { type: "json" };
-import { normalizeCatalog } from "./catalogNormalizer.js";
+import { PRODUCT_CATALOG } from "./catalog.js"; // centralized catalog
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-const PRODUCT_CATALOG = normalizeCatalog(rawCatalog);  // ✅ Clean once
-
-// 🔍 Debug: show first 5 normalized products
-console.log("📦 Normalized catalog sample:", PRODUCT_CATALOG.slice(0, 5));
+// 🔍 Debug: show first 5 catalog items
+console.log("📦 Catalog sample:", PRODUCT_CATALOG.slice(0, 5));
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_MODEL = "gemini-1.5-flash";
@@ -56,9 +53,7 @@ Return exactly ${topK} matches in strict JSON format:
 
     if (!geminiRes.ok) {
       console.error("❌ Gemini API error:", data);
-      return res
-        .status(500)
-        .json({ error: "Gemini API call failed", details: data });
+      return res.status(500).json({ error: "Gemini API call failed", details: data });
     }
 
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
