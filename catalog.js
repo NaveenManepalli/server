@@ -1,5 +1,7 @@
 export const PRODUCT_CATALOG =[
     {
+      id:1 ,
+
       brand: "CURAPOD by litemed",
       name: "Adaptive Pain Management",
       price: 8999,
@@ -7,6 +9,7 @@ export const PRODUCT_CATALOG =[
       description: "This device uses advanced technology to provide adaptive pain relief, targeting specific areas of discomfort for personalized therapy."
     },
     {
+      id:2 ,
       brand: "winston",
       name: "Electric LED Comb for Hair Therapy and Growth",
       price: 2098,
@@ -14,6 +17,7 @@ export const PRODUCT_CATALOG =[
       description: "Promote hair growth and improve scalp health with this electric LED comb that uses light therapy to stimulate hair follicles."
     },
     {
+      id:3 ,
       brand: "REMAXX",
       name: "Neck Massager",
       price: 1500,
@@ -21,6 +25,7 @@ export const PRODUCT_CATALOG =[
       description: "Relieve tension in your neck and shoulders with this ergonomic massager, featuring multiple modes and heat therapy for ultimate relaxation."
     },
     {
+      id:4 ,
       brand: "spandan",
       name: "Portable ECG Device",
       price: 7328,
@@ -28,6 +33,7 @@ export const PRODUCT_CATALOG =[
       description: "Monitor your heart health on the go with this portable ECG device, providing accurate readings that can be shared with your doctor."
     },
     {
+      id:5 ,
       brand: "caresmith",
       name: "Revive Electric Head Massager",
       price: 1149,
@@ -35,6 +41,7 @@ export const PRODUCT_CATALOG =[
       description: "Experience a soothing scalp massage with the Revive Electric Head Massager, designed to reduce stress and promote relaxation."
     },
     {
+      id: 6,
       brand: "caresmith",
       name: "Charge Boost Massage Gun",
       price: 1499,
@@ -42,6 +49,7 @@ export const PRODUCT_CATALOG =[
       description: "Target sore muscles and improve recovery with this powerful massage gun, equipped with multiple attachments for a customized experience."
     },
     {
+      id: 7,
       brand: "caresmith",
       name: "Revive Foot & Leg Massager",
       price: 12999,
@@ -49,6 +57,7 @@ export const PRODUCT_CATALOG =[
       description: "Soothe tired feet and legs with this comprehensive massager, featuring air compression and roller technology for a deep and invigorating massage."
     },
     {
+      id: 8,
       brand: "LUISLAM",
       name: "Airizona High-Speed lonic Hair Dryer",
       price: 12999,
@@ -56,6 +65,7 @@ export const PRODUCT_CATALOG =[
       description: "Achieve a salon-quality blowout at home with this high-speed ionic hair dryer, which reduces frizz and enhances shine for a flawless finish."
     },
     {
+      id: 9,
       brand: "winston",
       name: "Flexy 8-in-1 Professional Hot Air Styler & Hair Dryer Brush",
       price: 18999,
@@ -63,6 +73,7 @@ export const PRODUCT_CATALOG =[
       description: "Style and dry your hair simultaneously with this versatile 8-in-1 hot air styler, perfect for creating a variety of looks with ease."
     },
     {
+      id: 10,
       brand: "Miko",
       name: "Miko Mini",
       price: 9999,
@@ -70,6 +81,7 @@ export const PRODUCT_CATALOG =[
       description: "Engage your child with the Miko Mini, a playful and educational robot that tells stories, plays games, and answers questions."
     },
     {
+      id: 11,
       brand: "LEAF",
       name: "Bass Headphones",
       price: 1999,
@@ -77,6 +89,7 @@ export const PRODUCT_CATALOG =[
       description: "Immerse yourself in deep, powerful bass with these comfortable over-ear headphones, perfect for music lovers and gamers alike."
     },
     {
+      id: 12,
       brand: "Halo",
       name: "Smart Ring",
       price: 8999,
@@ -84,6 +97,7 @@ export const PRODUCT_CATALOG =[
       description: "Track your fitness and sleep patterns with the sleek and discreet Halo Smart Ring, which provides valuable insights into your overall health."
     },
     {
+      id: 13,
       brand: "TECSOX",
       name: "Luma-Led Projector",
       price: 3999,
@@ -91,6 +105,7 @@ export const PRODUCT_CATALOG =[
       description: "Transform any room into a home theater with this compact and powerful LED projector, offering a bright and vibrant display."
     },
     {
+      id: 14,
       brand: "HAMMER",
       name: "BeatBox Bluetooth Soundbar",
       price: 1999,
@@ -98,6 +113,7 @@ export const PRODUCT_CATALOG =[
       description: "Enhance your audio experience with the BeatBox Bluetooth Soundbar, delivering rich and immersive sound for movies, music, and games."
     },
     {
+      id: 15,
       brand: "METASHOT",
       name: "Smart Cricket Bat",
       price: 5999,
@@ -105,6 +121,7 @@ export const PRODUCT_CATALOG =[
       description: "Improve your batting skills with the METASHOT Smart Cricket Bat, which analyzes your performance and provides real-time feedback."
     },
     {
+      id: 16,
       brand: "Miko",
       name: "Miko 3",
       price: 19999,
@@ -112,6 +129,7 @@ export const PRODUCT_CATALOG =[
       description: "The Miko 3 is an advanced AI-powered robot that helps kids learn and develop new skills through interactive games and activities."
     },
     {
+      id: 17,
       brand: "bt",
       name: "Dot bluetooth speaker",
       price: 699,
@@ -119,6 +137,7 @@ export const PRODUCT_CATALOG =[
       description: "Enjoy your favorite music on the go with this compact and portable Bluetooth speaker, offering impressive sound in a small package."
     },
     {
+      id: 18,
       brand: "bt",
       name: "Blaze Wired Over Ear Gaming Headphones",
       price: 1999,
@@ -126,6 +145,7 @@ export const PRODUCT_CATALOG =[
       description: "Get a competitive edge with the Blaze gaming headphones, featuring crystal-clear audio and a comfortable design for long gaming sessions."
     },
     {
+      id: 19,
       brand: "MIRANA",
       name: "Spectre",
       price: 14299,
@@ -133,6 +153,7 @@ export const PRODUCT_CATALOG =[
       description: "Unleash your inner racer with the Spectre remote-controlled car, built for speed and durability for the ultimate off-road adventure."
     },
     {
+      id: 20,
       brand: "MIRANA",
       name: "Moonwalker",
       price: 1624,
@@ -140,6 +161,7 @@ export const PRODUCT_CATALOG =[
       description: "Explore new terrains with the Moonwalker remote-controlled car, designed for all-ages fun and excitement."
     },
     {
+      id: 21,
       brand: "MIRANA",
       name: "Mahindra Tractor",
       price: 2899,
@@ -147,6 +169,7 @@ export const PRODUCT_CATALOG =[
       description: "Experience the thrill of farming with this realistic remote-controlled Mahindra Tractor, perfect for imaginative play."
     },
     {
+      id: 22,
       brand: "upliance.ai",
       name: "AI Cooking Assistant",
       price: 27999,
@@ -154,6 +177,7 @@ export const PRODUCT_CATALOG =[
       description: "Simplify your cooking with this AI-powered assistant, which guides you through recipes and automates various cooking tasks."
     },
     {
+      id: 23,
       brand: "NOSH",
       name: "Autonomous Cooking Robot",
       price: 74999,
@@ -161,6 +185,7 @@ export const PRODUCT_CATALOG =[
       description: "Enjoy delicious meals with the push of a button with this autonomous cooking robot that chops, mixes, and cooks your food to perfection."
     },
     {
+      id: 24,
       brand: "KROFF",
       name: "La Cafeno 3-in-1 Coffee Machine",
       price: 11999,
@@ -168,6 +193,7 @@ export const PRODUCT_CATALOG =[
       description: "Brew your favorite coffee at home with this versatile 3-in-1 coffee machine, compatible with various capsules and ground coffee."
     },
     {
+      id: 25,
       brand: "enciser",
       name: "Emerald electric meter",
       price: 5999,
@@ -175,6 +201,7 @@ export const PRODUCT_CATALOG =[
       description: "Monitor your energy consumption in real-time with the Emerald electric meter, helping you save money and reduce your carbon footprint."
     },
     {
+      id: 26,
       brand: "MecTURING",
       name: "LASERON S9 Pro Plus ADC",
       price: 37999,
@@ -182,6 +209,7 @@ export const PRODUCT_CATALOG =[
       description: "Keep your floors spotless with the LASERON S9 Pro Plus ADC, a smart robot vacuum with advanced navigation and powerful suction."
     },
     {
+      id: 27,
       brand: "MecTURING",
       name: "S9 Pro+",
       price: 23890,
@@ -189,6 +217,7 @@ export const PRODUCT_CATALOG =[
       description: "The S9 Pro+ is a powerful and intelligent robot vacuum that provides a thorough and efficient cleaning experience."
     },
     {
+      id: 28,
       brand: "ILIFE",
       name: "A20",
       price: 17900,
@@ -196,6 +225,7 @@ export const PRODUCT_CATALOG =[
       description: "The ILIFE A20 is a robotic vacuum cleaner with advanced mapping and scheduling features for a customized cleaning routine."
     },
     {
+      id: 29,
       brand: "ILIFE",
       name: "T20s Pro",
       price: 36900,
@@ -203,6 +233,7 @@ export const PRODUCT_CATALOG =[
       description: "Experience superior cleaning performance with the ILIFE T20s Pro, a robot vacuum with powerful suction and mopping capabilities."
     },
     {
+      id: 30,
       brand: "ILIFE",
       name: "W90 Wet & Dry Cordless Stick Vacuum Cleaner",
       price: 13900,
@@ -210,6 +241,7 @@ export const PRODUCT_CATALOG =[
       description: "Clean up wet and dry messes with ease using the ILIFE W90, a versatile and lightweight cordless stick vacuum cleaner."
     },
     {
+      id: 31,
       brand: "JAFANDA",
       name: "Air Purifiers - True H13",
       price: 5999,
@@ -217,6 +249,7 @@ export const PRODUCT_CATALOG =[
       description: "Breathe cleaner air with the JAFANDA True H13 Air Purifier, which captures 99.97% of airborne particles for a healthier home environment."
     },
     {
+      id: 32,
       brand: "happinetz",
       name: "Parental Control Internet Filter",
       price: 7000,
@@ -224,6 +257,7 @@ export const PRODUCT_CATALOG =[
       description: "Ensure a safe online experience for your children with the happinetz Parental Control Internet Filter, which blocks inappropriate content."
     },
     {
+      id: 33,
       brand: "airth",
       name: "Split AC Air Purifier",
       price: 2500,
@@ -231,6 +265,7 @@ export const PRODUCT_CATALOG =[
       description: "Improve the air quality in your home with the airth Split AC Air Purifier, which removes dust, allergens, and other pollutants from the air."
     },
     {
+      id: 34,
       brand: "ARISTA VAULT",
       name: "Wallet Bot- Classic",
       price: 5280,
@@ -238,6 +273,7 @@ export const PRODUCT_CATALOG =[
       description: "Keep your valuables safe with the Wallet Bot- Classic, a smart wallet with GPS tracking and anti-theft features."
     },
     {
+      id: 35,
       brand: "ARISTA VAULT",
       name: "Smart Back Pack",
       price: 9840,
@@ -245,6 +281,7 @@ export const PRODUCT_CATALOG =[
       description: "Travel smarter with this innovative backpack, featuring a built-in power bank and anti-theft design for peace of mind."
     },
     {
+      id: 36,
       brand: "ARISTA VAULT",
       name: "Jarviz-Follow me luggage",
       price: 64880,
@@ -252,6 +289,7 @@ export const PRODUCT_CATALOG =[
       description: "Experience hands-free travel with the Jarviz-Follow me luggage, a smart suitcase that follows you wherever you go."
     },
     {
+      id: 37,
       brand: "WHILL",
       name: "C2 Electric Wheelchair",
       price: 300000,
@@ -259,6 +297,7 @@ export const PRODUCT_CATALOG =[
       description: "Navigate your world with ease and style in the WHILL C2 Electric Wheelchair, featuring a sleek design and advanced mobility features."
     },
     {
+      id: 38,
       brand: "RADBOARDS",
       name: "Hoverboard",
       price: 16999,
@@ -266,6 +305,7 @@ export const PRODUCT_CATALOG =[
       description: "Glide through your neighborhood on this self-balancing hoverboard, offering a fun and futuristic mode of transportation."
     },
     {
+      id: 39,
       brand: "RADBOARDS",
       name: "E-scooter",
       price: 36000,
@@ -273,6 +313,7 @@ export const PRODUCT_CATALOG =[
       description: "Commute in style with this sleek and foldable e-scooter, providing a convenient and eco-friendly way to get around the city."
     },
     {
+      id: 40,
       brand: "mygate",
       name: "Door Lock PLUS",
       price: 14990,
@@ -280,6 +321,7 @@ export const PRODUCT_CATALOG =[
       description: "Secure your home with the mygate Door Lock PLUS, a smart lock with multiple access options and real-time notifications."
     },
     {
+      id: 41,
       brand: "mygate",
       name: "Door Lock SE",
       price: 9450,
@@ -287,6 +329,7 @@ export const PRODUCT_CATALOG =[
       description: "The mygate Door Lock SE is a reliable and easy-to-use smart lock that provides keyless entry and enhanced security for your home."
     },
     {
+      id: 42,
       brand: "PandaX",
       name: "Wi-Fi Video Doorbell",
       price: 5099,
@@ -294,6 +337,7 @@ export const PRODUCT_CATALOG =[
       description: "See and speak to visitors at your door from anywhere with the PandaX Wi-Fi Video Doorbell, featuring two-way audio and motion detection."
     },
     {
+      id: 43,
       brand: "GLAVNA",
       name: "LA5 WF-Glass Door Lock (BLT)",
       price: 9690,
@@ -301,6 +345,7 @@ export const PRODUCT_CATALOG =[
       description: "Secure your glass doors with the GLAVNA LA5 WF, a smart lock with a sleek design and advanced security features."
     },
     {
+      id: 44,
       brand: "GLAVNA",
       name: "LS10-Cabinet Lock",
       price: 1190,
@@ -308,6 +353,7 @@ export const PRODUCT_CATALOG =[
       description: "Keep your valuables safe with the GLAVNA LS10, a smart cabinet lock that can be easily installed and controlled with your smartphone."
     },
     {
+      id: 45,
       brand: "GLAVNA",
       name: "LP40-Padlock",
       price: 1190,
@@ -315,6 +361,7 @@ export const PRODUCT_CATALOG =[
       description: "The GLAVNA LP40 is a durable and weatherproof smart padlock that provides keyless access and enhanced security for your belongings."
     },
     {
+      id: 46,
       brand: "EZVIZ",
       name: "Indoor PT H6C Pro 4MP",
       price: 3700,
@@ -322,6 +369,7 @@ export const PRODUCT_CATALOG =[
       description: "Monitor your home with the EZVIZ Indoor PT H6C Pro, a pan-and-tilt security camera with high-definition video and night vision."
     },
     {
+      id: 47,
       brand: "EZVIZ",
       name: "Outdoor PT H8 Pro - 3MP",
       price: 6801,
@@ -329,6 +377,7 @@ export const PRODUCT_CATALOG =[
       description: "Keep an eye on your property with the EZVIZ Outdoor PT H8 Pro, a weatherproof security camera with a wide viewing angle and motion detection."
     },
     {
+      id: 48,
       brand: "HIKVISION",
       name: "DS-KIS204 Video Door Phone",
       price: 6500,
@@ -336,6 +385,7 @@ export const PRODUCT_CATALOG =[
       description: "Enhance your home security with the HIKVISION DS-KIS204 Video Door Phone, which allows you to see and speak to visitors before opening the door."
     },
     {
+      id: 49,
       brand: "callmate",
       name: "Roadvoyager Car Dashboard Camera",
       price: 5999,
@@ -343,6 +393,7 @@ export const PRODUCT_CATALOG =[
       description: "Record your drives in high definition with the callmate Roadvoyager, a dashboard camera with a wide-angle lens and loop recording."
     },
     {
+      id: 50,
       brand: "callmate",
       name: "Roadrunner Car Dashboard Camera",
       price: 2999,
@@ -350,6 +401,7 @@ export const PRODUCT_CATALOG =[
       description: "The callmate Roadrunner is a compact and affordable dashboard camera that provides reliable recording and peace of mind on the road."
     },
     {
+      id: 51,
       brand: "Qubo",
       name: "Dash Cam Pro",
       price: 3990,
