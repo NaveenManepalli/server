@@ -1,56 +1,39 @@
-// File: server.js
+// server.js
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import cors from "cors"; // ✅ Import cors
-import { PRODUCT_CATALOG } from "./catalog.js"; // centralized catalog
+import rawCatalog from "./catalog.json" assert { type: "json" };
+import { normalizeCatalog } from "./catalogNormalizer.js";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-// ✅ Enable CORS for all origins (or restrict to your frontend)
-app.use(cors());
-// Or to restrict: app.use(cors({ origin: 'https://snack-web-player.s3.us-west-1.amazonaws.com' }));
+const PRODUCT_CATALOG = normalizeCatalog(rawCatalog);  // ✅ Clean once
+
+// 🔍 Debug: show first 5 normalized products
+console.log("📦 Normalized catalog sample:", PRODUCT_CATALOG.slice(0, 5));
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_MODEL = "gemini-1.5-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
-// ✅ Log on startup
-console.log("🔑 GEMINI_API_KEY present:", !!GEMINI_API_KEY);
-console.log(
-  "📦 Catalog loaded:",
-  Array.isArray(PRODUCT_CATALOG) ? PRODUCT_CATALOG.length : "NOT AN ARRAY"
-);
-
 // Proxy endpoint
 app.post("/recommend", async (req, res) => {
   try {
     const { query, topK = 3 } = req.body;
-    console.log("📩 Incoming request:", { query, topK });
 
-    // ✅ Log first few catalog entries
-    console.log("🔎 First 3 products:", PRODUCT_CATALOG.slice(0, 3));
-
-    // ✅ Robust mapping for your catalog keys
-    const catalogText = PRODUCT_CATALOG.map((p, i) => {
-      const id = `item-${i}`; // no explicit id in your catalog
-      const name = p.product_name || "Unknown Product";
-      const brand = p.brand ? `${p.brand} ` : "";
-      const category = p.category || "Uncategorized";
-      const desc = p.description || "";
-      const price = p.price ? ` - $${p.price}` : "";
-      return `- ${id}: ${brand}${name} (${category}) - ${desc}${price}`;
-    }).join("\n");
+    console.log("🔎 Incoming request:", { query, topK });
 
     const prompt = `
 You are a product recommendation AI. 
 Your ONLY job is to return JSON, nothing else.
 
 Catalog of products:
-${catalogText}
+${PRODUCT_CATALOG.map(
+  (p) => `- ${p.id}: ${p.name} (${p.category}) - ${p.description}`
+).join("\n")}
 
 User query: "${query}"
 
@@ -58,18 +41,14 @@ Return exactly ${topK} matches in strict JSON format:
 [
   { "id": "string", "name": "string", "reason": "string", "score": number }
 ]
-
-Do not add extra text, only return valid JSON.
 `;
 
-    console.log("📝 Prompt sent to Gemini:\n", prompt.slice(0, 1000), "...\n");
+    console.log("📝 Prompt sent to Gemini:\n", prompt.substring(0, 1000), "...");
 
     const geminiRes = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-      }),
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
 
     const data = await geminiRes.json();
@@ -89,12 +68,12 @@ Do not add extra text, only return valid JSON.
     try {
       const cleaned = text.replace(/```json|```/g, "").trim();
       recommendations = JSON.parse(cleaned);
-      console.log("✅ Parsed recommendations:", recommendations);
     } catch (err) {
-      console.error("⚠️ Failed to parse Gemini response:", text, err);
+      console.error("⚠️ Failed to parse Gemini response:", text);
       recommendations = [];
     }
 
+    console.log("✅ Parsed recommendations:", recommendations);
     res.json({ recommendations });
   } catch (err) {
     console.error("❌ Server error:", err);
@@ -102,7 +81,6 @@ Do not add extra text, only return valid JSON.
   }
 });
 
-// ✅ Use Render’s PORT
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`✅ Gemini proxy running at http://localhost:${PORT}/recommend`);
