@@ -2,12 +2,19 @@
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import cors from "cors";   // 👈 add this
 import { PRODUCT_CATALOG } from "./catalog.js"; // centralized catalog
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+  origin: "*",  // or "https://snack.expo.dev" if you want to lock it down
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // 🔍 Debug: show first 5 catalog items
 console.log("📦 Catalog sample:", PRODUCT_CATALOG.slice(0, 5));
